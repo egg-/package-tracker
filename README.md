@@ -1,6 +1,6 @@
 # package-tracker
 
-[![version](https://img.shields.io/npm/v/package-tracker.svg) ![download](https://img.shields.io/npm/dm/package-tracker.svg)](https://www.npmjs.com/package/package-tracker)
+[![version](https://img.shields.io/npm/v/package-tracker.svg) ![download](https://img.shields.io/npm/dm/package-tracker.svg)](https://www.npmjs.com/package/package-tracker) [![status status](https://travis-ci.org/egg-/package-tracker.svg?branch=master)](https://travis-ci.org/egg-/package-tracker)
 
 package-tracker is package tracking library for Node.js
 
@@ -203,4 +203,4 @@ Bug reports and pull requests are welcome on Github at [https://github.com/egg-/
 
 ## License
 
-package-tracker is licensed under the MIT license.
+package-tracker is licensed under the [MIT license](https://github.com/egg-/package-tracker/blob/master/LICENSE).
