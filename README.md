@@ -9,9 +9,9 @@ package-tracker is package tracking library for Node.js
 
 ## Company List
 
-| Name | Contributor |
-|-|-|
-| EMS | @egg- |
+Name | Contributor
+---- | ----
+EMS | @egg-
 
 ## Installation
 
@@ -36,24 +36,24 @@ ems.trace({trace_number}, function (err, result) {
 
 `tracker.STATUS.{CODE}`
 
-| CODE | VALUE | DESC |
-|-|-|-|
-| UNKNOWN | -1 | 알수 없음 |
-| RECEIVE | 10 | 접수 |
-| DEPARTURE | 20 | 발송 |
-| DEPARTURE_READY | 21 | 발송준비 |
-| ARRIVAL | 30 | 도착 |
-| ARRIVAL_OUTWARD_OFFICE | 31 | 발송교환국에도착 |
-| ARRIVAL_INWARD_OFFICE | 32 | 교환국도착 |
-| ARRIVAL_DESTIATION_AIRPORT | 33 | 상대국도착 |
-| TRANSPER_EXPRESS | 40 | 운송사인계 |
-| AIRPORT_RECEIVED | 50 | 항공사인수 |
-| AIRPORT_DEPARTURE | 51 | 항공기출발 |
-| CUSTOMS_PENDING | 60 | 통관검사대기 |
-| CUSTOMS | 65 | 통관및분류 |
-| DELIVERY_START | 70 | 배달준비 |
-| DELIVERY_COMPLETE | 75 | 배달완료 |
-| DELIVERY_UNSUCCESSFULE | 79 | 미배달 |
+CODE | VALUE | DESC
+---- | ---- | ----
+UNKNOWN | -1 | 알수 없음
+RECEIVE | 10 | 접수
+DEPARTURE | 20 | 발송
+DEPARTURE_READY | 21 | 발송준비
+ARRIVAL | 30 | 도착
+ARRIVAL_OUTWARD_OFFICE | 31 | 발송교환국에도착
+ARRIVAL_INWARD_OFFICE | 32 | 교환국도착
+ARRIVAL_DESTIATION_AIRPORT | 33 | 상대국도착
+TRANSPER_EXPRESS | 40 | 운송사인계
+AIRPORT_RECEIVED | 50 | 항공사인수
+AIRPORT_DEPARTURE | 51 | 항공기출발
+CUSTOMS_PENDING | 60 | 통관검사대기
+CUSTOMS | 65 | 통관및분류
+DELIVERY_START | 70 | 배달준비
+DELIVERY_COMPLETE | 75 | 배달완료
+DELIVERY_UNSUCCESSFULE | 79 | 미배달
 
 
 ### Sample
