@@ -168,8 +168,8 @@ DELIVERY_UNSUCCESSFULE | 79 | 미배달
     }
   ],
   "number": "EBXXXXXXXXXKR",
-  sender: 'C*aris',
-  receiver: 'R*i Egg',
+  "sender": "C*aris",
+  "receiver": "R*i Egg",
   "status_txt": "배달완료",
   "status": 75,
   "company": "EMS",
