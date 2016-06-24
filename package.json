@@ -1,0 +1,38 @@
+{
+  "name": "package-tracker",
+  "version": "0.1.0",
+  "author": {
+    "name": "egg",
+    "email": "i@egg.pe.kr"
+  },
+  "description": "package-tracker is package tracking library for Node.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/egg-/package-tracker.git"
+  },
+  "keywords": [
+    "package",
+    "delivery",
+    "tracker",
+    "shipping"
+  ],
+  "license": "MIT",
+  "main": "./index",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
+    "matchdep": "^1.0.1",
+    "mocha": "^2.5.3",
+    "nock": "^8.0.0"
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "cheerio": "^0.20.0",
+    "moment": "^2.13.0",
+    "request": "^2.72.0"
+  }
+}
