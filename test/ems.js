@@ -14,21 +14,27 @@ var prepareNock = function (number) {
     var info = url.parse(tracking.url)
 
     nock([info.protocol, info.host].join('//'))[tracking.method.toLowerCase()](info.path)
-      .replyWithFile(200, __dirname + '/../testhtml/' + number + '_' + key + '.html')
+      .replyWithFile(200, __dirname + '/../testhtml/ems-' + number + '-' + key + '.html')
   }
 }
 
 describe(tracker.COMPANY.EMS, function () {
-  var pendingCustomsNumber = 'ems_pending_customs'
-  var deliveryCompletesNumber = 'ems_delivery_complete'
+  var pendingCustomsNumber = 'EBPENDING00KR'
+  var deliveryCompletesNumber = 'EBCOMPLETE0KR'
+  var invalidNumber = 'INVALIDNUM0KR'
 
   before(function () {
+    // @todo add nock
     prepareNock(pendingCustomsNumber)
     prepareNock(deliveryCompletesNumber)
+    prepareNock(invalidNumber)
   })
 
   it('pending customs number', function (done) {
     ems.trace(pendingCustomsNumber, function (err, result) {
+      assert.equal(err, null)
+
+      assert.equal(pendingCustomsNumber, result.number)
       assert.equal(tracker.COMPANY.EMS, result.company_code)
       assert.equal(tracker.STATUS.CUSTOMS_PENDING, result.status)
 
@@ -42,12 +48,23 @@ describe(tracker.COMPANY.EMS, function () {
 
   it('delivery complete number', function (done) {
     ems.trace(deliveryCompletesNumber, function (err, result) {
+      assert.equal(err, null)
+
+      assert.equal(deliveryCompletesNumber, result.number)
       assert.equal(tracker.COMPANY.EMS, result.company_code)
       assert.equal(tracker.STATUS.DELIVERY_COMPLETE, result.status)
 
       for (var i = 0; i < result.histories.length; i++) {
         assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
       }
+
+      done()
+    })
+  })
+
+  it('invalid number', function (done) {
+    ems.trace(invalidNumber, function (err, result) {
+      assert.equal(err.code, tracker.ERROR.INVALID_NUMBER_HEADER)
 
       done()
     })

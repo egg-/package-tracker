@@ -1,0 +1,662 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--[if lt IE 7]>
+<script type="text/JavaScript"> location.replace("http://www.epost.go.kr/comm/goodbye_ie6.jsp"); </script>
+<![endif]-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>국제우편 배송조회 - 원클릭 배송조회</title>
+<link href="/iwww/css/comm/shipping/epost_common.css" rel="stylesheet" type="text/css" />
+<link href="/iwww/css/comm/shipping/shipping.css" rel="stylesheet" type="text/css" />
+<link href="/iwww/css/comm/shipping/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css" />
+<link href="/iwww/css/comm/2011/footer.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/iwww/jscripts/comm/common.js"></script>
+<script type="text/javascript" src="/iwww/jscripts/comm/jquery-1.9.1.min.js" ></script>
+<script type="text/javascript" src="/iwww/jscripts/comm/comnValidator.js"></script>
+<script type="text/javascript" src="/iwww/jscripts/comm/jquery-ui-1.9.2.custom.js" ></script>
+<script type="text/javascript" src="/iwww/jscripts/comm/shipping_comm.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	//등기번호 조회 input
+    var	shippingNumTxt = '예시) EM123456789KR ‘-’를 제외한 숫자만 입력해 주세요.'
+	$("#POST_CODE").val(shippingNumTxt).css('color','#999').focus(function(){
+		if($(this).val() == shippingNumTxt){
+			$(this).val('').css('color','#222');
+		}
+	}).blur(function(){
+		if($(this).val() == ''){
+			$(this).val(shippingNumTxt).css('color','#999');
+		}
+	});
+//	document.getElementById("POST_CODE").value = "EM110160101KR"; // 개발 테스트용
+
+
+});
+
+
+// EMS 조회
+function chkTrace() {
+
+    if(('20160627102545' > '20110320100000') && ('20160627102545' < '20110320190000')){
+        return false;
+    }
+
+    var POST_CODE = document.getElementById("POST_CODE");
+
+	if (!POST_CODE.value) {
+		alert("EMS번호 13자리를 입력하여 주십시오.");
+		POST_CODE.focus();
+		return false;
+	}
+
+	POST_CODE.value = POST_CODE.value.trim();
+
+	if (POST_CODE.value.length != 13) {
+		alert("EMS번호 13자리를 입력하여 주십시오.");
+		POST_CODE.focus();
+		return false;
+	}
+
+	if(POST_CODE.value.substring(0,1).toUpperCase() != 'E'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'G'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'U'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'C'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'R'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'V'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'B'
+        		&& POST_CODE.value.substring(0,1).toUpperCase() != 'L'
+				&& POST_CODE.value.substring(0,2).toUpperCase() != 'ZZ') {
+
+		alert('우편물번호를 다시 확인하세요.');
+		POST_CODE.focus();
+		return false;
+	}
+
+	if(POST_CODE.value.substring(0,2).toUpperCase()=='LK'){
+		var country = POST_CODE.value.substring(POST_CODE.value.length - 2, POST_CODE.value.length).toUpperCase();
+
+		if(!(country =='KR' || country =='AU')){
+			alert('우편물번호를 다시 확인하세요.');
+			POST_CODE.focus();
+			return false;
+		}
+	}else if(POST_CODE.value.substring(0,2).toUpperCase()=='ZZ'){
+		var country = POST_CODE.value.substring(POST_CODE.value.length - 2, POST_CODE.value.length).toUpperCase();
+
+		if(!(country =='KR')){
+			alert('우편물번호를 다시 확인하세요.');
+			POST_CODE.focus();
+			return false;
+		}
+	}
+    return true;
+}
+
+// 종적조회서비스중지안내
+function traceStop(){
+    if(('20160627102545' > '20110320100000') && ('20160627102545' < '20110320190000')){
+        alert("항상 인터넷우체국 서비스를 이용해 주셔서 감사합니다.\n전산시스템 개선작업으로 인터넷우체국 종적조회서비스(콜센터 1588-1300,\nARS조회포함)가 일시 중단되오니 양해하여 주시기 바랍니다.\n\n- 중지일시: 2011.03.20() 10:00 ~ 2011.03.20() 19:00 까지");
+        document.getElementById("POST_CODE").value = "";
+    }
+}
+
+//배달조회(등기번호,ems번호)시 '-'가 포함될 경우 알람창 및 '-'삭제
+function checkPostNum(){
+	var chk=false;
+	var inputPostNum = document.getElementById("POST_CODE").value;
+
+    for (i = 0; i <  inputPostNum.length; i++) {
+    	var Char = inputPostNum.charAt(i);
+		if(Char == '-'){
+			chk=true;
+			break;
+		}
+    }
+    if(chk){
+    	alert('"-" 을 제외하고 입력하시기 바랍니다.');
+    	for (i = 0; i <  inputPostNum.length; i++) {
+			inputPostNum = inputPostNum.replace("-","");
+    	}
+    	document.getElementById("POST_CODE").value = inputPostNum;
+    }
+}
+
+// email행방조사청구 링크
+function emailEMS(e) {
+    if(isAccess(e)) {
+	    if(confirm('송달소요기간(약1주일)이 경과한 경우 청구가 가능합니다.'))
+	    {
+	        location.href='http://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=&flag=2';
+	    }
+    }
+	return false;
+}
+
+function eng_search()
+{
+	    lp = (screen.width - 770) / 2;
+	    tp= (screen.height - 600) / 2;
+
+	    window.open('https://trace.epost.go.kr/xtts/tt/epost/ems/ems_eng.jsp','ems_sch','width=770, height=600, scrollbars=yes, left='+lp+',top='+tp);
+}
+
+//]]>
+</script>
+</head>
+
+<body>
+<div class="all_wrap" style="width:690px"><a name="top" id="top"></a>
+	<div class="accessibility-menu">
+		<ul>
+			<li><a href="#service">인터넷우체국 서비스메뉴 바로가기</a></li>
+			<li><a href="#menu">메뉴 바로가기</a></li>
+			<li><a href="#contents">본문 바로가기</a></li>
+			<li><a href="#footer">하단 주소 및 전화번호 바로가기</a></li>
+		</ul>
+	</div>
+
+	<div class="header_area" style="display:none">
+	<!-- 공통서비스메뉴 -->
+
+
+
+
+
+<!--[if lt IE 7]>
+<script type="text/JavaScript"> location.replace("http://www.epost.go.kr/comm/goodbye_ie6.jsp"); </script>
+<![endif]-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://www.epost.go.kr//jscripts/comm/MemAutoLogout.js" ></script>
+<form name="frmpeautoup" id="frmpeautoup" method="post" action="" target="ifCkReset">
+	<input type="hidden"  name="userId" id="userId" value="" />
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+   if(typeof jQuery == 'undefined'){
+
+     document.write('   <script type=\"text/javascript\" src=\"http://www.epost.go.kr//jscripts/comm/jquery-1.9.1.min.js\" ><\/script>  ');
+
+   }
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+setCookie("ckstm", '1466990745043');
+//쿠키 셋팅
+function setCookie( name, value ) {
+    document.cookie = name + '=' + escape(value) + ';path=/;domain=epost.go.kr' ;
+}
+
+window.onunload=function() {
+
+    	if(event.clientY <0) {
+    		updateMemLoginStatusLogout('','http://www.epost.go.kr/');
+    	}
+
+}
+// 일부 페이지에서 onunload가 호출되지 않는경우를 위해서
+window.onbeforeunload=function() {
+		if(event.clientY <0) {
+    		updateMemLoginStatusLogout('','http://www.epost.go.kr/');
+    	}
+}
+
+//]]>
+</script>
+<iframe name="ifCkReset" title="예외페이지 쿠키리셋 프레임" width="0" height="0"></iframe>
+
+
+<!-- 키보드 해킹 방지 프로그램 설치 -->
+<script type="text/javascript" src="https://www.epost.go.kr/comm/easykeytec/easykeytec.js"></script>
+<script type="text/JavaScript" src="https://www.epost.go.kr/jscripts/comm/logininfoURL.js"></script>
+&nbsp;
+<div id="nepostTopMenu"><a name="service" id="service"></a>
+    <ul>
+
+		<li class="btn"><a href="http://www.epost.go.kr/usr/login/cafzc008k01.jsp"><img src="https://www.epost.go.kr/images/comm/2010/comm/co_EpostbtnLogin.gif" width="43" height="15" alt="로그인" /></a></li>
+
+      <li><a href="http://service.epost.go.kr/">우편</a></li>
+      <li><a href="http://parcel.epost.go.kr/">택배</a></li>
+      <li><a href="http://ems.epost.go.kr/">EMS</a></li>
+      <li><a href="http://service.epost.go.kr/comm.RetrieveStampSrvcMain.postal" target="_top">우표</a></li>
+      <li><a href="http://mall.epost.go.kr/">쇼핑</a></li>
+      <li><a href="">메일</a></li>
+      <li class="nobg"><a href="http://www.epost.go.kr/bbs.RetrieveBbsMain.comm" target="_blank"><strong>고객의소리</strong></a></li>
+    </ul>
+  </div>
+  <div id="LaynWrapToplogo"><a href="http://www.epost.go.kr/"><img src="https://www.epost.go.kr/images/comm/2010/comm/co_TopLogo.gif"  alt="인터넷우체국 ePOST.kr" /></a></div>
+
+
+	<!--//공통서비스메뉴 -->
+	</div>
+
+	<!--상단메뉴-->
+	<div style="display:none">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 키보드 해킹 방지 프로그램 설치 -->
+<script type="text/javascript" src="https://www.epost.go.kr/comm/easykeytec/easykeytec.js"></script>
+<script type="text/JavaScript" src="/iwww/jscripts/comm/logininfoURL.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function tab(n){
+	if(n == 1)
+		location.href = "/iservice/usr/trace/usrtrc001k01.jsp";
+	if(n == 2)
+		location.href = "/iservice/usr/trace/usrtrc004k01.jsp";
+	if(n == 3)
+		location.href = "http://www.epost.go.kr/usr/login/cafzc008k01.jsp?login=mall_bsearch&amp;s_url=https://mall.epost.go.kr/purchase.benefit.RetrieveDeliveryPage.mall";
+}
+
+//]]>
+</script>
+
+	<div class="topmenu_area_shipping"><a name="menu" id="menu"></a>
+		<h1><img src="/iwww/images/comm/shipping/logo_title.gif" alt="원클릭 배송조회" /></h1>
+		<ul class="topmenulist">
+			<li><a href="/iservice/usr/trace/usrtrc001k01.jsp"><img src="/iwww/images/comm/shipping/topmenu01_off.gif" alt="국내우편(등기/택배)배송조회" /></a></li>
+			<li><a href="/iservice/usr/trace/usrtrc004k01.jsp"><img src="/iwww/images/comm/shipping/topmenu02_on.gif" alt="국제우편(EMS)배송조회" /></a></li>
+			<li><a href="http://www.epost.go.kr/usr/login/cafzc008k01.jsp?login=mall_bsearch&amp;s_url=https://mall.epost.go.kr/purchase.benefit.RetrieveDeliveryPage.mall"><img src="/iwww/images/comm/shipping/topmenu03_off.gif" alt="우체국쇼핑 주문배송조회" /></a></li>
+		</ul>
+	</div>
+
+	</div>
+	<!--//상단메뉴-->
+
+	<div class="accessibility-top"><a href="#top">위로가기</a></div>
+
+	<!-- 컨텐츠영역 -->
+	<div class="contents_wrap" style="width:690px"><a name="contents" id="contents"></a>
+		<!-- left area -->
+		<div style="display:none">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="leftmenu_wrap">
+			<dl class="leftmenu_list">
+				<dt><a href="/iservice/usr/trace/usrtrc001k01.jsp"><img src="/iwww/images/comm/shipping/leftmenu_title.gif" alt="원클릭 배송조회 "/></a></dt>
+				<dd>
+					<ul class="leftmenu_list_depth">
+						<li><a href="/iservice/usr/trace/usrtrc001k01.jsp"><img src="/iwww/images/comm/shipping/leftmenu01_off.gif" alt="국내우편(등기/택배)배송조회" /></a></li>
+						<li><a href="/iservice/usr/trace/usrtrc004k01.jsp"><img src="/iwww/images/comm/shipping/leftmenu02_on.gif" alt="국제우편(EMS)배송조회" /></a></li>
+						<li class="end"><a href="http://www.epost.go.kr/usr/login/cafzc008k01.jsp?login=mall_bsearch&amp;s_url=https://mall.epost.go.kr/purchase.benefit.RetrieveDeliveryPage.mall"><img src="/iwww/images/comm/shipping/leftmenu03_off.gif" alt="우체국쇼핑 주문배송조회" /></a></li>
+					</ul>
+				</dd>
+			</dl>
+		</div>
+
+		</div>
+
+		<!-- //left area -->
+		<!-- center area -->
+		<div class="incontents_wrap">
+			<h2 class="page02">국제우편 배송조회</h2>
+			<!-- 배송조회 선택 -->
+			<div class="shipping_area">
+				<div class="shipping_tabmenu" style="display:none">
+					<ul>
+						<li><a href="javascript:tab(1);"><span>국내우편(등기/택배)배송조회</span></a></li>
+						<li class="on"><a href="javascript:tab(2);"><span>국제우편(EMS)배송조회</span></a></li>
+						<li><a href="javascript:tab(3);"><span>우체국쇼핑 주문배송조회</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- 조회 번호 -->
+			<div class="shipping_area">
+				<h3>EMS(등기)번호로 조회<span><a href="javascript:eng_search()"><img src="/iwww/images/comm/shipping/btn_ems_eng.gif" alt="EMS 영문조회_새창으로 열림" title="EMS 영문조회_새창으로 열림"/></a><a href="http://www.emspremium.com" target="_blank"><img src="/iwww/images/comm/shipping/btn_ems_pre.gif" alt="EMS 프리미엄_새창으로 열림" title="EMS 프리미엄_새창으로 열림"/></a></span></h3>
+				<form name="frmEmsRigiTrace" id="frmEmsRigiTrace" action="/trace.RetrieveEmsRigiTraceList.comm" onsubmit="return chkTrace();" method="post">
+				<div class="box">
+					<label for="POST_CODE">EMS(등기)번호 입력</label>
+					<input type="text" id="POST_CODE" name="POST_CODE" class="input_text" value="" maxlength="13" onclick="return traceStop();" onkeypress="return traceStop();" onkeyup="checkPostNum();" />
+				</div>
+				<p class="btn">
+					<input type="image" src="/iwww/images/comm/shipping/btn_shipping_search.gif" alt="조회하기" />
+				</p>
+		        <input type="hidden" id="displayHeader" name="displayHeader" value="N" />
+				</form>
+			</div>
+			<div class="shipping_area">
+                <h3>외국의 인터넷 홈페이지를 이용한 EMS 행방조회</h3>
+                <div class="ems_foreign_country_list">
+						<ul class="ems_foreign_country">
+							<li><a href="http://www.correoargentino.com.ar/formularios/oidn" target="blank"><span style="color:#ff6600;">A</span>rgentina(아르헨티나)</a></li>
+							<li><a href="http://www.haypost.am/en" target="blank">Armenia(아르메니아)</a></li>
+							<li><a href="http://auspost.com.au/track/track.html" target="blank">Australia(호주)</a></li>
+							<li><a href="http://www.post.at/en/track_trace.php?language=en" target="blank">Austria(오스트리아)</a></li>
+							<li><a href="http://www.azems.az/en/index_en.htm" target="blank">Azerbaijan(아제르바이잔)</a></li>
+							<li><a href="http://www.bangladeshpost.gov.bd/track.asp" target="blank"><span style="color:#ff6600;">B</span>angladesh(방글라데시)</a></li>
+							<li><a href="http://search.belpost.by" target="blank">Belarus(백러시아)</a></li>
+							<li><a href="http://www.bpost.be/site/fr/business/index.html" target="blank">Belgium(벨기에)</a></li>
+							<li><a href="http://www.correios.com.br/english?set_language=en" target="blank">Brazil(브라질)</a></li>
+							<li><a href="http://www.canadapost.ca/segment-e.asp" target="blank"><span style="color:#ff6600;">C</span>anada(캐나다)</a></li>
+							<li><a href="http://www.correos.cl/SitePages/home.aspx" target="blank">Chile(칠레)</a></li>
+							<li><a href="http://www.ems.com.cn/" target="blank">China(중국)</a></li>
+							<li><a href="https://www.correos.go.cr" target="blank">Costa Rica(코스타리카)</a></li>
+							<li><a href="http://ips.posta.hr/" target="blank">Croatia(크로아티아)</a></li>
+							<li><a href="http://www.postdanmark.dk/en/tracktrace/Pages/home.aspx" target="blank"><span style="color:#ff6600;">D</span>enmark(덴마크)</a></li>
+							<li><a href="http://ipsweb.correosdelecuador.com.ec/ipswebtracking/" target="blank"><span style="color:#ff6600;">E</span>cuador(에콰도르)</a></li>
+							<li><a href="http://www.posti.fi/private/postisservices/tools/itemtracking/" target="blank"><span style="color:#ff6600;">F</span>inland(핀란드)</a></li>
+							<li><a href="http://www.chronopost.fr/transport-express/livraison-colis/homepage" target="blank">France(프랑스)</a></li>
+						</ul>
+
+						<ul class="ems_foreign_country">
+							<li><a href="http://www.dhl.de/en.html" target="blank"><span style="color:#ff6600;">G</span>ermany(독일)</a></li>
+							<li><a href="http://app3.hongkongpost.com/CGI/mt/enquiry.jsp" target="blank"><span style="color:#ff6600;">H</span>ong Kong(홍콩)</a></li>
+							<li><a href="http://posta.hu/tracking" target="blank">Hungary(헝가리)</a></li>
+							<li><a href="http://www.postur.is/en/parcels/track-trace/" target="blank"><span style="color:#ff6600;">I</span>celand(아이슬란드)</a></li>
+							<li><a href="http://www.indiapost.gov.in/tracking.aspx" target="blank">India(인도)</a></li>
+							<li><a href="http://ems.posindonesia.co.id/" target="blank">Indonesia(인도네시아)</a></li>
+							<li><a href="http://track.anpost.ie/track/trackone.html" target="blank">Ireland(아일랜드)</a></li>
+							<li><a href="http://web01.postil.com/hpcontent.nsf/EntryHomePage?ReadForm&amp;L=EN" target="blank">Israel(이스라엘)</a></li>
+							<li><a href="https://trackings.post.japanpost.jp/services/srv/search/?locale=en" target="blank"><span style="color:#ff6600;">J</span>apan(일본)</a></li>
+							<li><a href="http://www.tnt.com/country/fr_lu.html" target="blank"><span style="color:#ff6600;">L</span>uxembourg(룩셈브루크)</a></li>
+							<li><a href="http://www.pos.com.my/postal-services/quick-access/?track-trace" target="blank"><span style="color:#ff6600;">M</span>alaysia(말레이지아)</a></li>
+							<li><a href="http://www.correosdemexico.gob.mx/English/Paginas/track.aspx" target="blank">Mexico(멕시코)</a></li>
+							<li><a href="http://www.ma.chronopost.com/web/fr/" target="blank">Morocco(모로코)</a></li>
+							<li><a href="http://www.gpo.gov.np/" target="blank"><span style="color:#ff6600;">N</span>epal(네팔)</a></li>
+							<li><a href="http://www.nzpost.co.nz" target="blank">New Zealand(뉴질랜드)</a></li>
+							<li><a href="http://www.emsng.com/" target="blank">Nigeria(나이지리아)</a></li>
+							<li><a href="http://www.posten.no/en/" target="blank">Norway(노르웨이)</a></li>
+							<li><a href="http://www.ep.gov.pk/" target="blank"><span style="color:#ff6600;">P</span>akistan(파키스탄)</a></li>
+						</ul>
+
+						<ul class="ems_foreign_country_none">
+							<li><a href="http://www.serpost.com.pe/" target="blank">Peru(페루)</a></li>
+							<li><a href="http://tnt.phlpost.gov.ph/index.asp" target="blank">Philippines(필리핀)</a></li>
+							<li><a href="http://www.russianpost.ru/tracking20/English.htm" target="blank"><span style="color:#ff6600;">R</span>ussian Federation(러시아)</a></li>
+							<li><a href="http://www.sp.com.sa/English/Saudipost/Pages/default.aspx" target="blank"><span style="color:#ff6600;">S</span>audi Arabia(사우디아라비아)</a></li>
+							<li><a href="http://www.speedpost.com.sg/" target="blank">Singapore(싱가포르)</a></li>
+							<li><a href="http://www.posta.sk/" target="blank">Slovakia(슬로바키아)</a></li>
+							<li><a href="http://www.correos.es/ss/Satellite/site/pagina-inicio/info?idiomaWeb=en_GB" target="blank">Spain(스페인)</a></li>
+							<li><a href="http://www.posten.se/tracktrace/TrackConsignments_do.jsp?lang=GB" target="blank">Sweden(스웨덴)</a></li>
+							<li><a href="http://www.swisspost.ch" target="blank">Switzerland(스위스)</a></li>
+							<li><a href="http://postserv.post.gov.tw/webpost/CSController?cmd=POS4005_1" target="blank"><span style="color:#ff6600;">T</span>aiwan(대만)</a></li>
+							<li><a href="http://track.thailandpost.co.th/tracking/default.aspx" target="blank">Thailand(태국)</a></li>
+							<li><a href="http://www.ptt.gov.tr/?wapp=lojistikServices_en&amp;id=69C94DBD-34B2-4A86-B537-94C6890631EA&amp;open=10&amp;im=5" target="blank">Turkey(터키)</a></li>
+							<li><a href="http://dpsz.ua/en/" target="blank"><span style="color:#ff6600;">U</span>kraine(우크라이나)</a></li>
+							<li><a href="http://www.epg.gov.ae/epweb/_en/index.xhtml;jsessionid=1E416FC28AEF5C89967B47899DF9EFD7" target="blank">United Arab Emirates<br />(아랍에미레이트)</a></li>
+							<li><a href="http://www.parcelforce.com" target="blank">United Kingdom(영국)</a></li>
+							<li><a href="http://www.usps.com/shipping/trackandconfirm.htm?from=trnkcnfrm" target="blank">USA(미국)</a></li>
+							<li><a href="http://www.vnpost.vn/" target="blank"><span style="color:#ff6600;">V</span>ietnam(베트남)</a></li>
+						</ul>
+                </div>
+			</div>
+		</div>
+	</div>
+	<!-- //컨텐츠영역 -->
+	<div class="accessibility-top"><a href="#top">위로가기</a></div>
+	<!-- footer 영역 -->
+	<div style="display:none">
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript" type="text/JavaScript">
+//<![CDATA[
+
+function goNewLink(no,e) {
+	if(isAccess(e)) {
+
+	if(no=="1") { //Window XP 서비스팩2 설치고객에 대한 안내
+  	window.open('http://www.epost.go.kr/popup/guide_xp202.html','_blank','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,top=50,left=50,width=635,height=650');
+  } else if(no=="2") {	//비스타 사용자 안내
+  	window.open('http://www.epost.go.kr/popup/win_vista_pop0131.html','vistaPop','toolbar=no, width=496, height=530, location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,top=50,left=200');
+  }
+
+  return false;
+  }
+}
+function openPipl(){
+	    var topSize = screen.height/2 - 360;
+	    var leftSize = screen.width/2 - 260;
+	    window.open("http://www.epost.go.kr/popup/piplmark.html", "piplmark", "height=720,width=520,top="+topSize+",letf="+leftSize+", menubar=no,directories=no,resizable=no,status=no,scrollbars=yes");
+}
+
+/**인증서 링크 모음**/
+function cert_status(code, url, e) {
+    if(isAccess(e)) {
+        if (code==1) {
+            window.open(url, "cert_status1","height=600,width=570, menubar=no,directories=no,resizable=no,status=no,scrollbars=yes");
+        } else if (code==2) {
+            window.open(url, "cert_status2","height=600,width=570, menubar=no,directories=no,resizable=no,status=no,scrollbars=yes");
+        } else if (code==3) {
+            window.open(url,"iafewin","topmargin=0 marginleft=0 marginwidth=0 marginheight=0 width=365 height=610");
+        } else if (code==4) {
+            var v_top = (screen.height - 830)/2;
+            var v_left = (screen.width - 520)/2;
+        	window.open(url,"privacywin","width=520,height=830,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,top=" + v_top + ",left=" + v_left);
+        }
+        return false;
+  }
+}
+
+function goLinkRef(){
+
+        var frm = document.getElementById("linkselectFrm");
+        var ref = document.getElementById("linkselect").value;
+
+        if( ref == 1 ) {
+            frm.action = "http://www.koreapost.go.kr/";
+        }else if( ref == 2 ) {
+            frm.action = "http://www.koreapost.go.kr/se/";
+        }else if( ref == 3 ) {
+            frm.action = "http://www.koreapost.go.kr/bs/";
+        }else if( ref == 4 ) {
+            frm.action = "http://www.koreapost.go.kr/kw/";
+        }else if( ref == 5 ) {
+            frm.action = "http://www.koreapost.go.kr/kb/";
+        }else if( ref == 6 ) {
+            frm.action = "http://www.koreapost.go.kr/jn/";
+        }else if( ref == 7) {
+            frm.action = "http://www.koreapost.go.kr/jb/";
+        }else if( ref == 8 ) {
+            frm.action = "http://www.koreapost.go.kr/cc/";
+        }else if( ref == 9 ) {
+            frm.action = "http://www.koreapost.go.kr/jj/";
+        }else if( ref == 10 ) {
+            frm.action = "http://www.postmuseum.go.kr/";
+        }else if( ref == 11 ) {
+            frm.action = "http://www.posa.or.kr/";
+	    }else if( ref == 12 ) {
+	      frm.action = "http://kpic.koreapost.go.kr/";
+	    }else if( ref == 13 ) {
+	      frm.action = "http://www.keoti.go.kr/";
+	    }else if( ref == 14 ) {
+	      frm.action = "http://jodal.koreapost.go.kr/";
+	    }else if( ref == 15 ) {
+	      frm.action = "http://www.msip.go.kr/";
+	    }else if( ref == 16 ) {
+        frm.action = "http://www.koreapost.go.kr/gi/";
+      }
+
+       if( ref == 0 ) {
+         frm.action = "";
+         return false;
+        }
+
+       return true;
+}
+//]]>
+</script>
+  <div id="newLaynfootersubp" style="height:auto !important;"><a name="footer" id="footer"></a>
+    <div class="newfooteraddAreasubp">
+    	<span style="display:none;"><img src="/iwww/images/main/2011/footerGraylogo.gif" alt="인터넷우체국 ePOST.kr" /></span>
+        <div class="newaddcontentsubp">
+            <ul class="newssmenu">
+                <li><a href="http://www.epost.go.kr/affair/notice/cbfyb004k01.jsp" target="_top"><img src="/iwww/images/main/2011/footerSsmenu01.gif" alt="이용약관" /></a></li>
+                <li><a href="http://www.epost.go.kr/affair/notice/cbfyb005k01.jsp" target="_top"><img src="/iwww/images/main/2011/footerSsmenu02.gif" alt="개인정보취급방침" /></a></li>
+                <li><a href="http://www.epost.go.kr/affair/notice/cbfyb008k01.jsp" target="_top"><img src="/iwww/images/main/2011/footerSsmenu03.gif" alt="웹접근성정책" /></a></li>
+                <li class="newselarea">
+                    <form name="linkselectFrm" id="linkselectFrm" method="post" action="http://www.epost.go.kr/main/linkRedirect.jsp" onsubmit="return goLinkRef()" target="_blank" class="newfootlink">
+                        <select name="linkselect" id="linkselect" title="관련사이트"  style="width:115px;">
+                        <option value="0" selected="selected">관련사이트</option>
+                        <option value="1">우정사업본부</option>
+                        <option value="2">서울지방우정청</option>
+                        <option value="16">경인지방우정청 </option>
+                        <option value="3">부산지방우정청</option>
+                        <option value="4">강원지방우정청</option>
+                        <option value="5">경북지방우정청</option>
+                        <option value="6">전남지방우정청</option>
+                        <option value="7">전북지방우정청</option>
+                        <option value="8">충청지방우정청</option>
+                        <option value="9">제주지방우정청</option>
+                        <option value="10">사이버우정박물관</option>
+                        <option value="11">한국우편사업진흥원</option>
+                        <option value="12">우정사업정보센터</option>
+                        <option value="13">우정공무원교육원</option>
+                        <option value="14">우정사업조달사무소</option>
+                        <option value="15">미래창조과학부</option>
+                        </select>
+	                    <input type="image" src="/iwww/images/main/2010/nMfootBtn.gif" alt="이동 - 새창열림" />
+                    </form>
+                </li>
+            </ul>
+				<ul style="clear:both;overflow:hidden;margin:0;padding:0;">
+					<li style="float:left;margin:0;padding:0 10px 5px 10px;clear:none !important;background:url(http://www.epost.go.kr//images/main/2013/newaddr_line.gif) no-repeat right 1px;white-space:nowrap">인터넷우체국 대표 : 김재수</li>
+					<li style="float:left;margin:0;padding:0 10px 5px 10px;white-space:nowrap">사업자등록번호 : 206-83-02050</li>
+					<li style="float:left;background:none;padding:0 0 5px 10px;margin:0;width:650px;">58217 전라남도 나주시 정보화길 1, 인터넷우체국 (빛가람동) </li>
+
+					<li style="line-height:13px;float:left;margin:0;padding:0 10px 5px 10px;clear:both !important;background:url(http://www.epost.go.kr//images/main/2013/newaddr_line.gif) no-repeat right 1px;white-space:nowrap">우편고객만족센터 :<strong style="color:#ff0000">1588-1300</strong></li>
+					<li style="line-height:13px;float:left;margin:0;padding:0 10px 5px 10px;background:url(http://www.epost.go.kr//images/main/2013/newaddr_line.gif) no-repeat right 1px;white-space:nowrap;">팩스 : 0505-005-1037</li>
+					<li style="float:left;line-height:13px;background:none;padding:0 0 5px 10px;margin:0;white-space:nowrap;">이메일 : privacy@epost.kr</li>
+				</ul>
+        </div>
+        <div class="newfootmarksubp" style="float:right !important;margin-top:14px;">
+            <ul>
+            	<li><a href="#" onclick="openPipl();"><img src="http://www.epost.go.kr//images/main/2011/footerMark03.gif" alt="PIPL인증마크획득 - 새창 열림" /></a></li>
+                <li style="padding-left:25px;"><a href="http://www.epost.go.kr/popup/privacymark.html" onclick="return cert_status(4,this.href,event);" onkeypress="return cert_status(4,this.href,event);" target="_blank"><img src="http://www.epost.go.kr//images/main/2011/footerMark02.gif" alt="개인정보보호마크 - 새창 열림" /></a></li>
+                <li style="padding-left:25px;"><a href="http://www.epost.go.kr/popup/sign1.html" onclick="return cert_status(2,this.href,event);" onkeypress="return cert_status(2,this.href,event);" target="_blank"><img src="http://www.epost.go.kr//images/main/2011/footerMark01.gif" alt="보안마크획득 - 새창 열림" /></a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+<div id="flashbody" style="display:none;"></div>
+
+<script type="text/javascript" src="https://www.epost.go.kr/jscripts/comm/flash_conf.js"></script>
+<script type="text/javascript" src="https://www.epost.go.kr/jscripts/comm/flash_load.js"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var _NGUL = "wcs.naver.net/wcslog.js";
+if(location.protocol=="https:"){var nUrl="https://"+_NGUL;}else{var nUrl="http://"+_NGUL;}
+document.write("<scr"+"ipt type='text/javascript' src='"+nUrl+"'><\/scr"+"ipt>");
+//]]>
+</script>
+<script type="text/javascript">
+if (!wcs_add) var wcs_add={};
+wcs_add["wa"] = "s_f96b42ead65";
+if (!_nasa) var _nasa={};
+wcs.inflow("epost.go.kr");
+wcs_do(_nasa);
+</script>
+
+
+
+
+	</div>
+	<!-- //footer 영역 -->
+	<div class="accessibility-top"><a href="#top">위로가기</a></div>
+</div>
+</body>
+</html>

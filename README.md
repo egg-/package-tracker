@@ -55,6 +55,15 @@ DELIVERY_START | 70 | 배달준비
 DELIVERY_COMPLETE | 75 | 배달완료
 DELIVERY_UNSUCCESSFULE | 79 | 미배달
 
+### Error
+
+CODE | VALUE | DESC
+---- | ---- | ----
+UNKNOWN | -1 | Unknow error
+INVALID_NUMBER | 10 | invalid trace number.
+INVALID_NUMBER_LENGTH | 11 | invalid trace number.
+INVALID_NUMBER_HEADER | 12 | invalid trace number.
+INVALID_NUMBER_COUNTRY | 13 | invalid trace number.
 
 ### Sample
 
@@ -200,6 +209,10 @@ Bug reports and pull requests are welcome on Github at [https://github.com/egg-/
 1. Commit your changes.
 1. Push to the branch.
 1. Create a new Pull Request.
+
+## Release History
+
+See the [CHANGELOG.md](CHANGELOG.md)
 
 ## License
 
