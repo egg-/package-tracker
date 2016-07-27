@@ -26,10 +26,8 @@ module.exports = function (grunt) {
   })
 
   var defaultTestSrc = grunt.config('mochaTest.test.src')
-  console.log(defaultTestSrc)
   grunt.event.on('watch', function (action, filepath) {
     grunt.config('mochaTest.test.src', defaultTestSrc)
-    console.log(filepath)
     if (filepath.match('test/')) {
       grunt.config('mochaTest.test.src', filepath)
     }

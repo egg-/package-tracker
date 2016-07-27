@@ -72,7 +72,7 @@ $(document).ready(
 					});
 
 function init(){
-    if('MY' == 'CN'){
+    if('ID' == 'CN'){
     	alert("Please note that delivery to China could be delayed by increasing mail volumes.");
     }
 }
@@ -126,8 +126,8 @@ function emailEMS() {
 
 	    if(confirm('송달소요기간(약1주일)이 경과한 경우 청구가 가능합니다.'))
 	    {
-	        //location.href='https://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=EBCOMPLETE0KR&flag=2';
-	        window.open('https://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=EBCOMPLETE0KR&flag=2','ems','resizable=yes, scrollbars=yes, menubar=yes');
+	        //location.href='https://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=EBUNSUCCESSKR&flag=2';
+	        window.open('https://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=EBUNSUCCESSKR&flag=2','ems','resizable=yes, scrollbars=yes, menubar=yes');
 	    }
 
 }
@@ -152,9 +152,12 @@ function emailEMS() {
 					<dl class="dl_row2">
 						<dt class="w_100">Item Number</dt>
 						<dd class="w_260">
-							<input class="w_140 f_l m_r_5" type="text" value="EBCOMPLETE0KR" maxlength="13" size="20" id="POST_CODE" title="Item Number" name="POST_CODE" >
+							<input class="w_140 f_l m_r_5" type="text" value="EBUNSUCCESSKR" maxlength="13" size="20" id="POST_CODE" title="Item Number" name="POST_CODE" >
 							<a class="btn_s f_l search" href="javascript:void(0);" onclick="return transValue();" title="Search">Search</a>
 						 </dd>
+
+							 		<dt class="m_b_0">Mail Type</dt>
+	                 	<dd class="w_170"><span class="f_l m_r_10">: EMS</span></dd>
 
 
 
@@ -204,7 +207,7 @@ function emailEMS() {
 
                         </p>
 						<p>Transit or Destination country :
-                                MALAYSIA
+                                INDONESIA
                         </p>
 
 
@@ -255,7 +258,7 @@ function emailEMS() {
 
 				<tr>
 					<td>
-                        15:01
+                        14:46
                         30-Jun-2016
 
                     </td>
@@ -269,14 +272,14 @@ function emailEMS() {
                     </td>
 
                     <td class="leftAlg">
-                        <p>Dispatch number : 401</p>
+                        <p>Dispatch number : 343</p>
                     </td>
 
     				</tr>
 
 				<tr>
 					<td>
-                        16:48
+                        16:59
                         30-Jun-2016
 
                     </td>
@@ -291,7 +294,7 @@ function emailEMS() {
 
                     <td class="leftAlg">
 
-                        <p>Flight number : KE671</p>
+                        <p>Flight number : GA879</p>
 
                     </td>
 
@@ -299,87 +302,7 @@ function emailEMS() {
 
 				<tr>
 					<td>
-                        14:05
-                        01-Jul-2016
-
-                    </td>
-					<td>
-						Received by Air carrier
-
-					</td>
-					<td>
-                        INCHEON
-
-                    </td>
-
-                    <td class="leftAlg">
-                    </td>
-
-    				</tr>
-
-				<tr>
-					<td>
-                        16:44
-                        01-Jul-2016
-
-                    </td>
-					<td>
-						Departure from Airport
-
-					</td>
-					<td>
-                        INCHEON
-
-                    </td>
-
-                    <td class="leftAlg">
-                    </td>
-
-    				</tr>
-
-				<tr>
-					<td>
-                        21:52
-                        01-Jul-2016
-
-                    </td>
-					<td>
-						Airrival at Destination Airport
-
-					</td>
-					<td>
-                        KUALALUMPUR
-
-                    </td>
-
-                    <td class="leftAlg">
-                    </td>
-
-    				</tr>
-
-				<tr>
-					<td>
-                        23:02
-                        01-Jul-2016
-
-                    </td>
-					<td>
-						Delivered to Destination Airport
-
-					</td>
-					<td>
-                        KUALALUMPUR
-
-                    </td>
-
-                    <td class="leftAlg">
-                    </td>
-
-    				</tr>
-
-				<tr>
-					<td>
-                        22:45
+                        09:21
                         02-Jul-2016
 
                     </td>
@@ -388,7 +311,7 @@ function emailEMS() {
 
 					</td>
 					<td>
-                        MYKULA
+                        IDJKTA
 
                     </td>
 
@@ -399,7 +322,7 @@ function emailEMS() {
 
 				<tr>
 					<td>
-                        22:46
+                        09:51
                         02-Jul-2016
 
                     </td>
@@ -408,7 +331,7 @@ function emailEMS() {
 
 					</td>
 					<td>
-                        MYKULA
+                        IDJKTA
 
                     </td>
 
@@ -419,8 +342,8 @@ function emailEMS() {
 
 				<tr>
 					<td>
-                        00:49
-                        03-Jul-2016
+                        12:57
+                        11-Jul-2016
 
                     </td>
 					<td>
@@ -428,7 +351,7 @@ function emailEMS() {
 
 					</td>
 					<td>
-                        MYKULA
+                        IDJKTA
 
                     </td>
 
@@ -439,25 +362,43 @@ function emailEMS() {
 
 				<tr>
 					<td>
-                        11:40
-                        04-Jul-2016
+                        15:57
+                        11-Jul-2016
 
                     </td>
 					<td>
-						Delivery complete
+
 
 					</td>
 					<td>
-                        MY4332
+                        78000
 
                     </td>
 
-					<td class="leftAlg">
+                    <td class="leftAlg">
+                    </td>
 
-						<p>Recipient : K*NG()</p>
-						<p>Result : <span>Delivery complete</span></p>
+    				</tr>
+
+				<tr>
+					<td>
+                        16:27
+                        11-Jul-2016
+
+                    </td>
+					<td>
+						Unsuccessful delivery
+
 					</td>
+					<td>
+                        78000
 
+                    </td>
+
+                    <td class="leftAlg">
+                        <p>Reason : </p>
+                        <p>Result : </p>
+                    </td>
 
     				</tr>
 

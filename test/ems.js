@@ -20,23 +20,39 @@ var prepareNock = function (number) {
 
 describe(tracker.COMPANY.EMS, function () {
   var pendingCustomsNumber = 'EBPENDING00KR'
+  var unsucessfullCustomsNumber = 'EBUNSUCCESSKR'
   var deliveryCompletesNumber = 'EBCOMPLETE0KR'
   var invalidNumber = 'INVALIDNUM0KR'
 
   before(function () {
     // @todo add nock
     prepareNock(pendingCustomsNumber)
+    prepareNock(unsucessfullCustomsNumber)
     prepareNock(deliveryCompletesNumber)
     prepareNock(invalidNumber)
   })
 
-  it('pending customs number', function (done) {
+  it('pending number', function (done) {
     ems.trace(pendingCustomsNumber, function (err, result) {
       assert.equal(err, null)
-
       assert.equal(pendingCustomsNumber, result.number)
       assert.equal(tracker.COMPANY.EMS, result.company_code)
       assert.equal(tracker.STATUS.CUSTOMS_PENDING, result.status)
+
+      for (var i = 0; i < result.histories.length; i++) {
+        assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
+      }
+
+      done()
+    })
+  })
+
+  it('unsucessfull number', function (done) {
+    ems.trace(unsucessfullCustomsNumber, function (err, result) {
+      assert.equal(err, null)
+      assert.equal(unsucessfullCustomsNumber, result.number)
+      assert.equal(tracker.COMPANY.EMS, result.company_code)
+      assert.equal(tracker.STATUS.DELIVERY_UNSUCCESSFULE, result.status)
 
       for (var i = 0; i < result.histories.length; i++) {
         assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
