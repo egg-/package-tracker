@@ -1,3 +1,6 @@
+# 0.3.1
+* apply history timezone.
+
 # 0.3.0
 * apply the changed result page.
 * add test page.
