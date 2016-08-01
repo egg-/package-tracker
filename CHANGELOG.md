@@ -1,3 +1,6 @@
+# 0.4.0
+* add command line.
+
 # 0.3.1
 * apply history timezone.
 

@@ -30,6 +30,22 @@ ems.trace({trace_number}, function (err, result) {
 })
 ```
 
+### command line
+
+```sh
+$ npm install -g package-tracker
+$ package-tracker -h
+
+Usage: index [options] <tracecode>
+
+  Options:
+
+    -h, --help               output usage information
+    -c, --company <company>  Company Name
+
+$ package-tracker -c ems EBXXXXXXXXXKR
+```
+
 ## Response
 
 ### Status Code
