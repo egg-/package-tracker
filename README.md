@@ -12,6 +12,7 @@ package-tracker is package tracking library for Node.js
 Name | Contributor
 ---- | ----
 EMS | @egg-
+ECARGO | @egg-
 
 ## Installation
 
