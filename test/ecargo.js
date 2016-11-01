@@ -20,18 +20,12 @@ var prepareNock = function (number) {
 
 describe(tracker.COMPANY.ECARGO, function () {
   var departureNumber = 'ESDEPARTURE'
-  // var pendingCustomsNumber = 'ESDEPARTURE'
-  // var unsucessfullCustomsNumber = 'EBUNSUCCESSKR'
-  // var deliveryCompletesNumber = 'EBCOMPLETE0KR'
-  // var invalidNumber = 'INVALIDNUM0KR'
+  var completeNumber = 'ESCOMPLETE'
 
   before(function () {
     // @todo add nock
     prepareNock(departureNumber)
-  // prepareNock(pendingCustomsNumber)
-  // prepareNock(unsucessfullCustomsNumber)
-  // prepareNock(deliveryCompletesNumber)
-  // prepareNock(invalidNumber)
+    prepareNock(completeNumber)
   })
 
   it('departure number', function (done) {
@@ -49,57 +43,18 @@ describe(tracker.COMPANY.ECARGO, function () {
     })
   })
 
-  // it('pending number', function (done) {
-  //   ecargo.trace(pendingCustomsNumber, function (err, result) {
-  //     assert.equal(err, null)
-  //     assert.equal(pendingCustomsNumber, result.number)
-  //     assert.equal(tracker.COMPANY.ECARGO, result.company_code)
-  //     assert.equal(tracker.STATUS.CUSTOMS_PENDING, result.status)
-  //
-  //     for (var i = 0; i < result.histories.length; i++) {
-  //       assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
-  //     }
-  //
-  //     done()
-  //   })
-  // })
+  it('complete number', function (done) {
+    ecargo.trace(completeNumber, function (err, result) {
+      assert.equal(err, null)
+      assert.equal(completeNumber, result.number)
+      assert.equal(tracker.COMPANY.ECARGO, result.company_code)
+      assert.equal(tracker.STATUS.DELIVERY_COMPLETE, result.status)
 
-// it('unsucessfull number', function (done) {
-//   ecargo.trace(unsucessfullCustomsNumber, function (err, result) {
-//     assert.equal(err, null)
-//     assert.equal(unsucessfullCustomsNumber, result.number)
-//     assert.equal(tracker.COMPANY.ECARGO, result.company_code)
-//     assert.equal(tracker.STATUS.DELIVERY_UNSUCCESSFULE, result.status)
-//
-//     for (var i = 0; i < result.histories.length; i++) {
-//       assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
-//     }
-//
-//     done()
-//   })
-// })
-//
-// it('delivery complete number', function (done) {
-//   ecargo.trace(deliveryCompletesNumber, function (err, result) {
-//     assert.equal(err, null)
-//
-//     assert.equal(deliveryCompletesNumber, result.number)
-//     assert.equal(tracker.COMPANY.ECARGO, result.company_code)
-//     assert.equal(tracker.STATUS.DELIVERY_COMPLETE, result.status)
-//
-//     for (var i = 0; i < result.histories.length; i++) {
-//       assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
-//     }
-//
-//     done()
-//   })
-// })
-//
-// it('invalid number', function (done) {
-//   ecargo.trace(invalidNumber, function (err, result) {
-//     assert.equal(err.code, tracker.ERROR.INVALID_NUMBER_HEADER)
-//
-//     done()
-//   })
-// })
+      for (var i = 0; i < result.histories.length; i++) {
+        assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
+      }
+
+      done()
+    })
+  })
 })
