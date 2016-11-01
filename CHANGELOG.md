@@ -1,3 +1,6 @@
+# 0.5.0
+* add ecargo. (http://ecargo.asia)
+
 # 0.4.0
 * add command line.
 
