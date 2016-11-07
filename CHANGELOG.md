@@ -1,3 +1,6 @@
+# 0.6.0
+* add kpacket.
+
 # 0.5.0
 * add ecargo. (http://ecargo.asia)
 

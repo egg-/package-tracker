@@ -13,6 +13,7 @@ Name | Contributor
 ---- | ----
 EMS | @egg-
 ECARGO | @egg-
+KPACKET | @egg-
 
 ## Installation
 
