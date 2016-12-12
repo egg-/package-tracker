@@ -1,6 +1,6 @@
 {
   "name": "package-tracker",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": {
     "name": "egg",
     "email": "i@egg.pe.kr"
@@ -24,6 +24,7 @@
     "ecargo",
     "kpacket",
     "k-packet",
+    "jx",
     "post"
   ],
   "license": "MIT",

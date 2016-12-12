@@ -1,3 +1,6 @@
+# 0.7.0
+* add jx global.
+
 # 0.6.0
 * add kpacket.
 
