@@ -21,11 +21,13 @@ var prepareNock = function (number) {
 describe(tracker.COMPANY.ECARGO, function () {
   var departureNumber = 'ESDEPARTURE'
   var completeNumber = 'ESCOMPLETE'
+  var unsuccessfullNumber = 'ESUNSUCCESSFULE'
 
   before(function () {
     // @todo add nock
     prepareNock(departureNumber)
     prepareNock(completeNumber)
+    prepareNock(unsuccessfullNumber)
   })
 
   it('departure number', function (done) {
@@ -49,6 +51,21 @@ describe(tracker.COMPANY.ECARGO, function () {
       assert.equal(completeNumber, result.number)
       assert.equal(tracker.COMPANY.ECARGO, result.company_code)
       assert.equal(tracker.STATUS.DELIVERY_COMPLETE, result.status)
+
+      for (var i = 0; i < result.histories.length; i++) {
+        assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)
+      }
+
+      done()
+    })
+  })
+
+  it('unsuccessfull number', function (done) {
+    ecargo.trace(unsuccessfullNumber, function (err, result) {
+      assert.equal(err, null)
+      assert.equal(unsuccessfullNumber, result.number)
+      assert.equal(tracker.COMPANY.ECARGO, result.company_code)
+      assert.equal(tracker.STATUS.DELIVERY_UNSUCCESSFULE, result.status)
 
       for (var i = 0; i < result.histories.length; i++) {
         assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)

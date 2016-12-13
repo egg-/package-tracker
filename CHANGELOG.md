@@ -1,3 +1,6 @@
+# 0.7.1
+* add ecargo status code (CUSTOMS, DELIVERY_UNSUCCESSFULE)
+
 # 0.7.0
 * add jx global.
 
