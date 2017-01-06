@@ -48,7 +48,8 @@
 <script type="text/javascript">
 //<![CDATA[
 
-	// 우체국정보 상세조회
+
+// 우체국정보 상세조회
 	function goPostDetail(pcode, eventnm) {
 			//윈도우 팝업 생성 변경 (기존의 네비게이션을 제거 하면서 return Jsp 로 포워드 하게 변경) 2012.04.09 이철재
 			window.open('','poInfo','width=330,height=232,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no');
@@ -221,6 +222,7 @@ $(document).ready(function () {
 		var html = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns='http://www.w3.org/1999/xhtml' lang='ko' xml:lang='ko'><head>";
 		html += "<link type='text/css' rel='stylesheet' href='/np2assets/css/sub.css' />";
 		html += "<style type='text/css'>";
+		html += "body, input, select, textarea, a, button{font-family:'dotum',돋움 !important;height:100%;}";
 		html += ".dpno{display:none;}";
 		html += "</style>";
 		html += "</head>";
@@ -296,7 +298,7 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 //<![CDATA[
-setCookie("ckstm", '1478519204845');
+setCookie("ckstm", '1483688268447');
 //쿠키 셋팅
 function setCookie( name, value ) {
     document.cookie = name + '=' + escape(value) + ';path=/;domain=epost.go.kr' ;
@@ -319,6 +321,8 @@ window.onbeforeunload=function() {
 //]]>
 </script>
 <iframe name="ifCkReset" title="예외페이지 쿠키리셋 프레임" width="0" height="0"></iframe>
+
+
 
 
 
@@ -561,10 +565,10 @@ function parcelLink(surl,num,e){
 										</li>
 									</ul>
 									 <ul>
-										<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=CP&amp;file=1" title="부가서비스">부가서비스</a>
+										<li><a href="https://service.epost.go.kr/front.commonpost.RetrieveAcceptIntro.postal" title="부가서비스">부가서비스</a>
 											 <ul>
 												<li><a href="https://service.epost.go.kr/front.commonpost.RetrieveAcceptIntro.postal" title="간편사전접수">간편사전접수</a></li>
-												<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=CP&amp;file=1" title="통상우편방문접수예약" class="l_s_2">통상우편물 방문접수 예약</a></li>
+
 												<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=K&amp;file=1" title="현금배달">현금배달</a></li>
 												<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=D&amp;file=1" title="민원우편">민원우편</a></li>
 												<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=A&amp;file=1" title="주거이전서비스">주거이전서비스</a></li>
@@ -597,12 +601,12 @@ function parcelLink(surl,num,e){
 								<dd class="n1">
 									 <ul>
 
-										<li><a href="http://mall.epost.go.kr/fo/display/pavlnDivDspyType.do?pavlnDivCd=01" target="_blank" title="특산물 새창열림">특산물</a></li>
-										<li><a href="http://mall.epost.go.kr/fo/main/moveFlowerSend.do" target="_blank" title="꽃배달 새창열림">꽃배달</a></li>
-										<li><a href="http://mall.epost.go.kr/fo/main/moveSijang.do" target="_blank" title="전통시장 새창열림">전통시장</a></li>
-										<li><a href="http://mall.epost.go.kr/fo/main/moveOverSend.do" target="_blank" title="해외배송 새창열림">해외배송</a></li>
+										<li><a href="http://mall.epost.go.kr/fo/display/pavlnDivDspyType.do?pavlnDivCd=01"  title="특산물 새창열림">특산물</a></li>
+										<li><a href="http://mall.epost.go.kr/fo/main/moveFlowerSend.do"  title="꽃배달 새창열림">꽃배달</a></li>
+										<li><a href="http://mall.epost.go.kr/fo/main/moveSijang.do"  title="전통시장 새창열림">전통시장</a></li>
+										<li><a href="http://mall.epost.go.kr/fo/main/moveOverSend.do"  title="해외배송 새창열림">해외배송</a></li>
 
-										<li><a href="http://b2b.epost.go.kr/btobmall.mmain.index.btb" target="_blank" title="우체국B2B 새창열림">우체국B2B</a></li>
+										<li><a href="http://b2b.epost.go.kr/btobmall.mmain.index.btb"  title="우체국B2B 새창열림">우체국B2B</a></li>
 										<!-- 2016.04.27 개발 중 메뉴
 										<li><a href="#" title="동대문B2B">동대문B2B</a></li> -->
 									</ul>
@@ -737,7 +741,7 @@ function parcelLink(surl,num,e){
 											<ul>
 												<li><a href="https://service.epost.go.kr/front.cardmail.RetrieveCardmailNew.postal?ServiceGubun=C" title="축하카드">축하카드</a></li>
 								                <li><a href="https://service.epost.go.kr/front.cardmail.RetrieveHighCardmailNew.postal" title="축하선물카드">축하선물카드</a></li>
-								                <li><a href="https://service.epost.go.kr/front.cardmail.RetrieveBarunsonCardListNew.postal" title="민간제휴카드">민간제휴카드</a></li>
+
 
 								                <li><a href="https://service.epost.go.kr/front.newyearcard.RetrieveNewyearcardList1.postal" title="연하카드">연하카드</a></li>
 
@@ -755,19 +759,15 @@ function parcelLink(surl,num,e){
 								</dd>
 							</dl>
 							<dl class="n6">
-								<dt><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="제휴서비스">제휴서비스</a></dt>
+								<dt><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="우체국알뜰폰">우체국알뜰폰</a></dt>
 								<dd class="n1">
 									 <ul>
-										<li><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="우체국알뜰폰">우체국알뜰폰</a>
-											<ul>
-								                <li><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="알뜰폰 020신청">알뜰폰 020신청</a></li>
-												<li><a href="https://www.epost.go.kr/comm/alddl/alddl02k001.jsp" title="요금제">요금제</a></li>
-								                <li><a href="https://www.epost.go.kr/comm.alddl.RetrieveAlddlPhoneImgList.comm" title="단말기">단말기</a></li>
-								                <li><a href="https://www.epost.go.kr/comm/alddl/alddl06k001.jsp" title="판매우체국찾기">판매우체국찾기</a></li>
-								                <li><a href="https://www.epost.go.kr/postphonecs.comm" title="문의게시판">문의게시판</a></li>
-								            </ul>
-										</li>
-										<li><a href="https://www.epost.go.kr/comm/junggo/junggo11k001.jsp" title="모바일 중고포털 안내">모바일 중고포털</a></li>
+						                <li><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="온라인 숍">온라인 숍</a></li>
+										<li><a href="https://www.epost.go.kr/comm/alddl/alddl02k001.jsp" title="요금제">요금제</a></li>
+						                <li><a href="https://www.epost.go.kr/comm.alddl.RetrieveAlddlPhoneImgList.comm" title="단말기">단말기</a></li>
+						                <li><a href="https://www.epost.go.kr/comm/alddl/alddl06k001.jsp" title="판매우체국찾기">판매우체국찾기</a></li>
+						                <li><a href="https://www.epost.go.kr/postphonecs.comm" title="문의게시판">문의게시판</a></li>
+
 										<li><a href="https://www.epost.go.kr/comm/alddl/alddl08k001.jsp" title="군 장병 휴대폰 대여서비스">군인 폰 대여서비스</a>
 											<ul>
 												<li><a href="https://www.epost.go.kr/comm/alddl/alddl08k001.jsp" title="서비스 소개">서비스 소개</a></li>
@@ -835,10 +835,10 @@ function parcelLink(surl,num,e){
 								<li><a href="https://service.epost.go.kr/front.deliveryProof.mainPage.postal" title="발송 후 배달증명">발송 후 배달증명</a></li>
 							</ul>
 						</li>
-						<li class="dep"><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=CP&amp;file=1" title="부가서비스" >부가서비스</a>
+						<li class="dep"><a href="https://service.epost.go.kr/front.commonpost.RetrieveAcceptIntro.postal" title="부가서비스" >부가서비스</a>
 							<ul class="depth3">
 								<li class="first"><a href="https://service.epost.go.kr/front.commonpost.RetrieveAcceptIntro.postal" title="간편사전접수" >간편사전접수</a></li>
-								<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=CP&amp;file=1" title="통상우편방문접수예약" >통상우편물 방문접수 예약</a></li>
+
 								<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=K&amp;file=1" title="현금배달">현금배달</a></li>
 								<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=D&amp;file=1" title="민원우편">민원우편</a></li>
 								<li><a href="https://service.epost.go.kr/comm.RetrievePostagSrvcStrt.postal?menu=A&amp;file=1" title="주거이전서비스">주거이전서비스</a></li>
@@ -864,15 +864,15 @@ function parcelLink(surl,num,e){
 					</ul>
 				</div>
 				<div class="menu m2">
-					<h2><a href="http://mall.epost.go.kr/" target="_blank" title="우체국쇼핑 새창열림">우체국쇼핑</a></h2>
+					<h2><a href="http://mall.epost.go.kr/"  title="우체국쇼핑 새창열림">우체국쇼핑</a></h2>
 					<ul class="depth2">
 
-						<li><a href="http://mall.epost.go.kr/fo/display/pavlnDivDspyType.do?pavlnDivCd=01" target="_blank" title="특산물 새창열림">특산물</a></li>
-						<li><a href="http://mall.epost.go.kr/fo/main/moveFlowerSend.do" target="_blank" title="꽃배달 새창열림">꽃배달</a></li>
-						<li><a href="http://mall.epost.go.kr/fo/main/moveSijang.do" target="_blank" title="전통시장 새창열림">전통시장</a></li>
-						<li><a href="http://mall.epost.go.kr/fo/main/moveOverSend.do" target="_blank" title="해외배송 새창열림">해외배송</a></li>
+						<li><a href="http://mall.epost.go.kr/fo/display/pavlnDivDspyType.do?pavlnDivCd=01"  title="특산물 새창열림">특산물</a></li>
+						<li><a href="http://mall.epost.go.kr/fo/main/moveFlowerSend.do"  title="꽃배달 새창열림">꽃배달</a></li>
+						<li><a href="http://mall.epost.go.kr/fo/main/moveSijang.do"  title="전통시장 새창열림">전통시장</a></li>
+						<li><a href="http://mall.epost.go.kr/fo/main/moveOverSend.do"  title="해외배송 새창열림">해외배송</a></li>
 
-						<li><a href="http://b2b.epost.go.kr/btobmall.mmain.index.btb" target="_blank" title="우체국B2B 새창열림">우체국B2B</a></li>
+						<li><a href="http://b2b.epost.go.kr/btobmall.mmain.index.btb" title="우체국B2B 새창열림">우체국B2B</a></li>
 						<!-- 2016.04.27 개발 중 메뉴
 						<li><a href="#" title="동대문B2B">동대문B2B</a></li> -->
 					</ul>
@@ -1047,7 +1047,7 @@ function parcelLink(surl,num,e){
 							<ul class="depth3">
 								<li class="first"><a href="https://service.epost.go.kr/front.cardmail.RetrieveCardmailNew.postal?ServiceGubun=C" title="축하카드">축하카드</a></li>
 								<li><a href="https://service.epost.go.kr/front.cardmail.RetrieveHighCardmailNew.postal" title="축하선물카드">축하선물카드</a></li>
-								<li><a href="https://service.epost.go.kr/front.cardmail.RetrieveBarunsonCardListNew.postal" title="민간제휴카드">민간제휴카드</a></li>
+
 
 				                <li><a href="https://service.epost.go.kr/front.newyearcard.RetrieveNewyearcardList1.postal" title="연하카드">연하카드</a></li>
 
@@ -1060,21 +1060,16 @@ function parcelLink(surl,num,e){
 					</ul>
 				</div>
 				<div class="menu m6">
-					<h2><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="제휴서비스">제휴서비스</a></h2>
+					<h2><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="우체국알뜰폰">우체국알뜰폰</a></h2>
 					<ul class="depth2">
-						<li class="dep"><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="우체국알뜰폰">우체국알뜰폰</a>
-							<ul class="depth3">
-								<li class="first"><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="알뜰폰 020신청">알뜰폰 020신청</a></li>
-								<li><a href="https://www.epost.go.kr/comm/alddl/alddl02k001.jsp" title="요금제">요금제</a></li>
-								<li><a href="https://www.epost.go.kr/comm.alddl.RetrieveAlddlPhoneImgList.comm" title="단말기">단말기</a></li>
-								<li><a href="https://www.epost.go.kr/comm/alddl/alddl01k001.jsp" title="알뜰폰 소개">알뜰폰 소개</a></li>
-								<li><a href="https://www.epost.go.kr/comm/alddl/alddl04k001.jsp" title="가입절차">가입절차</a></li>
-								<li><a href="https://www.epost.go.kr/bbs.RetrieveFaqFrontView.comm?codetype=U&code=U01" title="자주하는 질문">자주하는 질문</a></li>
-								<li><a href="https://www.epost.go.kr/comm/alddl/alddl06k001.jsp" title="판매우체국찾기">판매우체국찾기</a></li>
-								<li><a href="https://www.epost.go.kr/postphonecs.comm" title="문의게시판">문의게시판</a></li>
-							</ul>
-						</li>
-						<li><a href="https://www.epost.go.kr/comm/junggo/junggo11k001.jsp" title="모바일 중고포털">모바일 중고포털</a></li>
+		                <li><a href="https://www.epost.go.kr/comm.alddl.noticeList.comm" title="온라인 숍">온라인 숍</a></li>
+						<li><a href="https://www.epost.go.kr/comm/alddl/alddl02k001.jsp" title="요금제">요금제</a></li>
+		                <li><a href="https://www.epost.go.kr/comm.alddl.RetrieveAlddlPhoneImgList.comm" title="단말기">단말기</a></li>
+		                <li><a href="https://www.epost.go.kr/comm/alddl/alddl01k001.jsp" title="알뜰폰 소개">알뜰폰 소개</a></li>
+		                <li><a href="https://www.epost.go.kr/comm/alddl/alddl04k001.jsp" title="가입절차">가입절차</a></li>
+		                <li><a href="https://www.epost.go.kr/bbs.RetrieveFaqFrontView.comm?codetype=U&code=U01" title="자주하는 질문">자주하는 질문</a></li>
+		                <li><a href="https://www.epost.go.kr/comm/alddl/alddl06k001.jsp" title="판매우체국찾기">판매우체국찾기</a></li>
+		                <li><a href="https://www.epost.go.kr/postphonecs.comm" title="문의게시판">문의게시판</a></li>
 						<li class="dep"><a href="https://www.epost.go.kr/comm/alddl/alddl08k001.jsp" title="군인 폰 대여서비스">군인 폰 대여서비스</a>
 							<ul class="depth3">
 								<li class="first"><a href="https://www.epost.go.kr/comm/alddl/alddl08k001.jsp" title="서비스 소개">서비스 소개</a></li>
@@ -1164,10 +1159,10 @@ function parcelLink(surl,num,e){
 					</thead>
 					<tbody>
 						<tr>
-							<th scope="row">EBPENDING00KR</th>
-							<td>m*dsquare<br />2016-10-26</td>
-							<td>N*r Annisa Hafizh Ilmi<br /></td>
-							<td>통관검사대기</td>
+							<th scope="row">REARRIVALINKR</th>
+							<td>m*dsquare<br />2016-11-09</td>
+							<td>马*<br /></td>
+							<td>교환국 도착</td>
 							<td>국제등기</td>
 						</tr>
 
@@ -1197,7 +1192,7 @@ function parcelLink(surl,num,e){
 
 
             <tr>
-              <td>2016.10.26 12:39</td>
+              <td>2016.11.09 12:47</td>
               <td>&nbsp;접수</td>
               <td>서울강남</td>
 
@@ -1205,14 +1200,14 @@ function parcelLink(surl,num,e){
 06336
 
 			    <br />&nbsp;접수우체국전화번호 : 02-2040-4021
-			    <br />&nbsp;중계국 또는 도착국가 : 인도네시아(ID)
+			    <br />&nbsp;중계국 또는 도착국가 : 중국(CN)
 
 			  </td>
 
             </tr>
 
             <tr>
-              <td>2016.10.26 14:01</td>
+              <td>2016.11.09 13:15</td>
               <td>&nbsp;발송</td>
               <td>서울강남</td>
 
@@ -1221,7 +1216,7 @@ function parcelLink(surl,num,e){
             </tr>
 
             <tr>
-              <td>2016.10.26 14:19</td>
+              <td>2016.11.09 14:48</td>
               <td>&nbsp;발송교환국에 도착</td>
               <td>국제우편물류센터</td>
 
@@ -1230,7 +1225,7 @@ function parcelLink(surl,num,e){
             </tr>
 
             <tr>
-              <td>2016.10.26 16:36</td>
+              <td>2016.11.10 10:06</td>
               <td>&nbsp;발송준비</td>
               <td>국제우편물류센터</td>
 
@@ -1238,40 +1233,29 @@ function parcelLink(surl,num,e){
 
 			    &nbsp;발송국 : KRSELB(서울국제)<br />
 
-				&nbsp;도착예정 교환국 : IDJKTA<br />
-				&nbsp;발송횟수 : 565
+				&nbsp;도착예정 교환국 : CNBJSA<br />
+				&nbsp;발송횟수 : 244
 			  </td>
 
             </tr>
 
             <tr>
-              <td>2016.10.26 17:11</td>
+              <td>2016.11.10 13:48</td>
               <td>&nbsp;운송사 인계</td>
               <td>INCHEON</td>
 
 			  <td class="txtL">
-				&nbsp;항공편 : GA879
+				&nbsp;항공편 : OZ331
 			  </td>
 
             </tr>
 
             <tr>
-              <td>2016.10.28 09:47</td>
+              <td>2016.11.19 09:33</td>
               <td>&nbsp;교환국 도착</td>
-              <td>IDJKTA</td>
+              <td>CNBJSA</td>
 
 			  <td class="txtL">&nbsp;</td>
-
-            </tr>
-
-            <tr>
-              <td>2016.10.28 10:17</td>
-              <td>&nbsp;통관검사대기</td>
-              <td>IDJKTA</td>
-
-			  <td class="txtL">
-
-			  </td>
 
             </tr>
 
@@ -1304,7 +1288,7 @@ function parcelLink(surl,num,e){
 			</div>
 			<p class="t_a_c m_b_0">
 				<a class="btn_b w_150 icon bg_red4" href="http://ems.epost.go.kr/front.EmsInfoInfo01.postal" target="_blank" title="해외우정청 연락처 - 새창으로 열림">해외우정청 연락처</a>
-				<a class="btn_b w_170 icon bg_red4" href="http://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=EBPENDING00KR&flag=2" target="_blank" onclick="return emailEMS(event);" onkeypress="return emailEMS(event);" title="이메일 행방조사창구 - 새창으로 열림">이메일 행방조사창구</a>
+				<a class="btn_b w_170 icon bg_red4" href="http://ems.epost.go.kr/trace.RegisterEmsClaim.postal?POST_CODE=REARRIVALINKR&flag=2" target="_blank" onclick="return emailEMS(event);" onkeypress="return emailEMS(event);" title="이메일 행방조사창구 - 새창으로 열림">이메일 행방조사창구</a>
 				<a class="btn_b w_150 icon" href="/iservice/usr/trace/usrtrc004k01.jsp?displayHeader=N" title="다시검색하기">다시검색하기</a>
 			</p>
 			<p class="footBanner t_a_c" style="display:none"><a href="http://www.emsonepack.com"><img src="/iwww/images/comm/shipping/img_footBanner_ems.gif" alt="배너아이콘" /></a></p>
@@ -1471,7 +1455,7 @@ function goLinkRef(){
 	<div class="add_wrap">
 		<address>
 			인터넷우체국 대표 : 김재수 &#160; | &#160; 사업자등록번호 : 206-83-02050 <br/>
-			58217 전라남도 나주시 정보화길 1, 인터넷우체국 (빛가람동) &#160; | &#160; 우편고객만족센터 :1588-1300 &#160; | &#160; 팩스 : 0505-005-1037 &#160; | &#160; 이메일 : privacy@epost.kr<br/>
+			58323 전라남도 나주시 정보화길 1, 인터넷우체국 (빛가람동) &#160; | &#160; 우편고객만족센터 :1588-1300 &#160; | &#160; 팩스 : 0505-005-1037 &#160; | &#160; 이메일 : privacy@epost.kr<br/>
 			Copyright(c) 2016. ePOST all rights reserved.<br />
 		</address>
 		<ul class="mark">
@@ -1496,16 +1480,16 @@ function goLinkRef(){
 
 <!-- 마스킹 해제 조회 팝업 -->
 <form method="post" name="frmReqMasking" id="detailForm" action="/trace.RetrieveDomRigiTraceMaskingList.comm" >
-<input type="hidden" name="sid1" value="EBPENDING00KR"/>
+<input type="hidden" name="sid1" value="REARRIVALINKR"/>
 <input type="hidden" name="enc_senderNm" value="FScp0+Ohx7I1rQS1PWEHmw==" />
-<input type="hidden" name="enc_receverNm" value="Qpbko8FOtocaeKwwOpUc0e8QLOtUhkVoO8RSe+RIHXw=" />
+<input type="hidden" name="enc_receverNm" value="EHVHXcTTro58m0iKMjmAhA==" />
 <input type="hidden" name="trgtCmd" value="/trace.RetrieveEmsRigiTraceMaskingList.comm" />
 </form>
 
 <!-- 마스킹 해제된 결과  -->
 <form method="post" name="frmSolvResult" id="frmSolvResult" action="/trace.RetrieveEmsRigiTraceList.comm" >
-<input type="hidden" name="sid1" value="EBPENDING00KR"/>
-<input type="hidden" name="POST_CODE" value="EBPENDING00KR"/>
+<input type="hidden" name="sid1" value="REARRIVALINKR"/>
+<input type="hidden" name="POST_CODE" value="REARRIVALINKR"/>
 <input type="hidden" name="prm_sender_nm" value="" />
 <input type="hidden" name="prm_receiver_nm" value="" />
 <input type="hidden" id="displayHeader" name="displayHeader" value="N" />
@@ -1515,12 +1499,12 @@ function goLinkRef(){
 <form name="tracefrm" id="tracefrm" action="/main.validateMainNoScript.comm" target="_blank">
 <input type="hidden" name="ems_gubun" value="E" />
 <input type="hidden" name="sid1" value="" />
-<input type="hidden" name="POST_CODE" value="EBPENDING00KR" />
+<input type="hidden" name="POST_CODE" value="REARRIVALINKR" />
 <input type="hidden" name="mgbn" value="trace" />
 <input type="hidden" name="traceselect" id="traceselect"  value=""/>
 <input type="hidden" name="target_command" value="" />
 <input type="hidden" name="JspURI" value="" />
-<input type="hidden" name="postNum" id="postNum" value="EBPENDING00KR" />
+<input type="hidden" name="postNum" id="postNum" value="REARRIVALINKR" />
 </form>
 </body>
 </html>

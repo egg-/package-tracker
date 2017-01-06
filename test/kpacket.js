@@ -1,3 +1,5 @@
+/* globals before it describe */
+
 'use strict'
 
 var assert = require('assert')
@@ -19,25 +21,25 @@ var prepareNock = function (number) {
 }
 
 describe(tracker.COMPANY.KPACKET, function () {
-  var pendingCustomsNumber = 'EBPENDING00KR'
+  var arrivalInwardNumber = 'REARRIVALINKR'
   var unsucessfullCustomsNumber = 'EBUNSUCCESSKR'
   var deliveryCompletesNumber = 'EBCOMPLETE0KR'
   var invalidNumber = 'INVALIDNUM0KR'
 
   before(function () {
     // @todo add nock
-    prepareNock(pendingCustomsNumber)
+    prepareNock(arrivalInwardNumber)
     prepareNock(unsucessfullCustomsNumber)
     prepareNock(deliveryCompletesNumber)
     prepareNock(invalidNumber)
   })
 
-  it('pending number', function (done) {
-    kpacket.trace(pendingCustomsNumber, function (err, result) {
+  it('arrival inward number', function (done) {
+    kpacket.trace(arrivalInwardNumber, function (err, result) {
       assert.equal(err, null)
-      assert.equal(pendingCustomsNumber, result.number)
+      assert.equal(arrivalInwardNumber, result.number)
       assert.equal(tracker.COMPANY.KPACKET, result.company_code)
-      assert.equal(tracker.STATUS.CUSTOMS_PENDING, result.status)
+      assert.equal(tracker.STATUS.ARRIVAL_INWARD_OFFICE, result.status)
 
       for (var i = 0; i < result.histories.length; i++) {
         assert.notEqual(tracker.STATUS.UNKNOWN, result.histories[i].status)

@@ -1,3 +1,6 @@
+# 0.7.2
+* update kpacket test data.
+
 # 0.7.1
 * add ecargo status code (CUSTOMS, DELIVERY_UNSUCCESSFULE)
 

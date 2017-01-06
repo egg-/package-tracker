@@ -1,3 +1,5 @@
+/* globals before it describe */
+
 'use strict'
 
 var assert = require('assert')
