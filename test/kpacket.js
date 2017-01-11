@@ -16,7 +16,7 @@ var prepareNock = function (number) {
     var info = url.parse(tracking.url)
 
     nock([info.protocol, info.host].join('//'))[tracking.method.toLowerCase()](info.path)
-      .replyWithFile(200, __dirname + '/../testhtml/kpacket-' + number + '-' + key + '.html')
+      .replyWithFile(200, __dirname + '/fixtures/kpacket-' + number + '-' + key + '.html')
   }
 }
 
